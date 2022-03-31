@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common'
 import { HttpClient, HttpClientModule } from '@angular/common/http'
 import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
@@ -10,6 +11,7 @@ import { AngularMaterialModule } from './angular-material.module'
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
 import { AuthModule } from './auth/auth-module'
+import { PagesModule } from './pages/pages-module'
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json')
@@ -20,7 +22,9 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     BrowserModule,
     AppRoutingModule,
     AuthModule,
+    PagesModule,
     NgbModule,
+    CommonModule,
     TranslateModule,
     BrowserAnimationsModule,
     FontAwesomeModule,
