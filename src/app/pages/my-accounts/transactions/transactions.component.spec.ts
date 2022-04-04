@@ -1,19 +1,19 @@
 /* tslint:disable:no-unused-variable */
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { MyAccountsComponent } from './my-accounts.component';
+import { TransactionsComponent } from './transactions.component';
 
-describe('MyAccountsComponent', () => {
-  let component: MyAccountsComponent;
-  let fixture: ComponentFixture<MyAccountsComponent>;
+describe('TransactionsComponent', () => {
+  let component: TransactionsComponent;
+  let fixture: ComponentFixture<TransactionsComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [MyAccountsComponent]
+      declarations: [TransactionsComponent]
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MyAccountsComponent);
+    fixture = TestBed.createComponent(TransactionsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,11 +1,12 @@
 <mat-toolbar fxLayout="row" color="primary">
-  <span fxFlex>Responsive Toolbar Demo</span>
+  <span fxFlex>YouBank</span>
   <button
     mat-button
     *ngFor="let item of menuItems"
     [fxShow]="item.showOnDesktop"
     [fxShow.xs]="item.showOnMobile"
     [fxShow.sm]="item.showOnTablet"
+    [routerLink]="item.link"
   >
     <mat-icon class="mr">{{ item.icon }}</mat-icon>
     {{ item.label }}
@@ -21,7 +22,7 @@
           [fxShow.sm]="!item.showOnTablet"
           [fxShow.xs]="!item.showOnMobile"
         >
-          <button mat-menu-item>
+          <button mat-menu-item [routerLink]="item.link">
             <mat-icon class="mr">{{ item.icon }}</mat-icon>
             {{ item.label }}
           </button>

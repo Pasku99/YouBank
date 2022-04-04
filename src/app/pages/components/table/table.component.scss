@@ -8,9 +8,13 @@ td {
 }
 
 mat-form-field {
-  width: 40%;
+  width: 50% !important;
 }
 
 .text-right {
   text-align: right !important;
+}
+
+.total {
+  color: rgba(0, 0, 0, 0.54);
 }
