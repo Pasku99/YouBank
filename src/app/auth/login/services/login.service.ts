@@ -17,11 +17,11 @@ export class LoginService {
   constructor(private http: HttpClient) {}
 
   login(user: UserLogin): Observable<any> {
-    return this.http.post(`${base_url}/${version}/users/login`, user);
+    return this.http.post(`${base_url}/login`, user);
   }
 
   isAuthenticated(): Observable<any> {
-    return this.http.get(`${base_url}/${version}/users/token`, this.headers);
+    return this.http.get(`${base_url}/login/token`, this.headers);
   }
 
   validate(correct: boolean, incorrect: boolean): Observable<boolean> {
@@ -33,7 +33,7 @@ export class LoginService {
       take(1),
       tap((res) => {
         this.user = res.user;
-        localStorage.setItem('token', res.token);
+        localStorage.setItem('x-token', res.token);
       }),
       map(() => {
         return correct;
