@@ -20,21 +20,6 @@ export class AuthGuard implements CanActivate {
       tap((resp) => {
         if (!resp) {
           this.router.navigateByUrl('/login');
-        } else if (!this.loginService.user?.isVerified) {
-          Swal.fire({
-            title: '¡Error de verificación!',
-            text: 'El usuario no se encuentra verificado. Verifique su email antes de iniciar sesión',
-            icon: 'error',
-            confirmButtonText: 'Ok',
-            allowOutsideClick: false
-          }).then((result) => {
-            if (result.value) {
-              localStorage.removeItem('token');
-              this.router.navigateByUrl('/login');
-            }
-          });
-        } else if (resp) {
-          this.router.navigateByUrl('/my-accounts');
         }
       })
     );

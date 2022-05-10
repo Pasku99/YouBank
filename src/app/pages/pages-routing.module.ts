@@ -9,14 +9,16 @@ const routes: Routes = [
   {
     path: 'my-accounts',
     component: PagesLayoutComponent,
-    canActivate: [AuthGuard],
-    children: [{ path: '', component: MyAccountsComponent }]
+    children: [
+      { path: '', component: MyAccountsComponent, canActivate: [AuthGuard] }
+    ]
   },
   {
     path: 'transactions',
     component: PagesLayoutComponent,
-    canActivate: [AuthGuard],
-    children: [{ path: '', component: TransactionsComponent }]
+    children: [
+      { path: '', component: TransactionsComponent, canActivate: [AuthGuard] }
+    ]
   }
 ];
 

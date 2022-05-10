@@ -18,7 +18,7 @@ export class NoauthGuard implements CanActivate {
     return this.loginService.validateNoToken().pipe(
       tap((resp) => {
         if (!resp) {
-          this.router.navigateByUrl('/my-accounts');
+          this.router.navigateByUrl('my-accounts');
         }
       })
     );

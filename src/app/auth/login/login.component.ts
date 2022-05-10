@@ -72,8 +72,7 @@ export class LoginComponent extends FormBase<UserLogin> implements OnInit {
           })
         )
         .subscribe((res) => {
-          localStorage.setItem('x-token', res.token);
-          this.router.navigateByUrl('my-accounts');
+          this.router.navigateByUrl('/my-accounts');
           this.waiting = false;
         });
     }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginService } from 'src/app/auth/login/services/login.service';
 import { MenuItem } from './models/toolbar.model';
 
 @Component({
@@ -27,7 +28,7 @@ export class ToolbarComponent implements OnInit {
     }
   ];
 
-  constructor() {}
+  constructor(private readonly loginService: LoginService) {}
 
   ngOnInit(): void {}
 
@@ -37,5 +38,11 @@ export class ToolbarComponent implements OnInit {
 
   removeOrder(event: any): void {
     console.log(event);
+  }
+
+  logout(item: MenuItem) {
+    if (item?.link === '/login' && item?.icon === 'logout') {
+      this.loginService.logout();
+    }
   }
 }

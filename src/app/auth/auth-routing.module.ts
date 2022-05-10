@@ -9,14 +9,16 @@ const routes: Routes = [
   {
     path: 'login',
     component: AuthLayoutComponent,
-    canActivate: [NoauthGuard],
-    children: [{ path: '', component: LoginComponent }]
+    children: [
+      { path: '', component: LoginComponent, canActivate: [NoauthGuard] }
+    ]
   },
   {
     path: 'register',
     component: AuthLayoutComponent,
-    canActivate: [NoauthGuard],
-    children: [{ path: '', component: RegisterComponent }]
+    children: [
+      { path: '', component: RegisterComponent, canActivate: [NoauthGuard] }
+    ]
   }
 ];
 

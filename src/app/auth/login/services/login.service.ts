@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { catchError, map, Observable, of, take, tap } from 'rxjs';
 import { User } from 'src/app/models/user.model';
 import { environment } from 'src/environments/environment';
@@ -14,10 +15,15 @@ const version = environment.version;
 export class LoginService {
   user: User = {} as User;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private readonly router: Router) {}
 
   login(user: UserLogin): Observable<any> {
-    return this.http.post(`${base_url}/login`, user);
+    return this.http.post(`${base_url}/login`, user).pipe(
+      tap((res: any) => {
+        localStorage.setItem('x-token', res.user?.token);
+        this.user = res;
+      })
+    );
   }
 
   isAuthenticated(): Observable<any> {
@@ -25,21 +31,21 @@ export class LoginService {
   }
 
   validate(correct: boolean, incorrect: boolean): Observable<boolean> {
-    if (!localStorage.getItem('token')) {
-      localStorage.removeItem('token');
+    if (this.token === '') {
+      localStorage.removeItem('x-token');
       return of(incorrect);
     }
     return this.isAuthenticated().pipe(
       take(1),
       tap((res) => {
+        localStorage.setItem('x-token', res.user?.token);
         this.user = res.user;
-        localStorage.setItem('x-token', res.token);
       }),
       map(() => {
         return correct;
       }),
       catchError(() => {
-        localStorage.removeItem('token');
+        localStorage.removeItem('x-token');
         return of(incorrect);
       })
     );
@@ -53,11 +59,20 @@ export class LoginService {
     return this.validate(false, true);
   }
 
+  logout(): void {
+    localStorage.removeItem('x-token');
+    this.router.navigateByUrl('login');
+  }
+
   get headers(): any {
     return {
       headers: {
-        'x-token': localStorage.getItem('token') || ''
+        'x-token': localStorage.getItem('x-token') || ''
       }
     };
+  }
+
+  get token(): string {
+    return localStorage.getItem('x-token') || '';
   }
 }

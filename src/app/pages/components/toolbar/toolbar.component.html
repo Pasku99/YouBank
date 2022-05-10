@@ -7,6 +7,7 @@
     [fxShow.xs]="item.showOnMobile"
     [fxShow.sm]="item.showOnTablet"
     [routerLink]="item.link"
+    (click)="logout(item)"
   >
     <mat-icon class="mr">{{ item.icon }}</mat-icon>
     {{ item.label }}
@@ -22,7 +23,7 @@
           [fxShow.sm]="!item.showOnTablet"
           [fxShow.xs]="!item.showOnMobile"
         >
-          <button mat-menu-item [routerLink]="item.link">
+          <button mat-menu-item [routerLink]="item.link" (click)="logout(item)">
             <mat-icon class="mr">{{ item.icon }}</mat-icon>
             {{ item.label }}
           </button>
