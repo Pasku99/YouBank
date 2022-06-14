@@ -1,19 +1,18 @@
 <div class="row mt-4 text-center">
-  <h2>Movimientos</h2>
-  <h3>Total: {{ total }}</h3>
+  <h2>Mis contactos</h2>
 </div>
 <div class="row m-auto">
   <app-custom-table
     class="col-xl-6 col-md-6 col-sm-8 col-12 mt-4 m-auto text-center juan"
-    [tableData]="transactions"
+    [tableData]="users"
     [tableColumns]="ordersTableColumns"
     [isFilterable]="true"
     [isPageable]="true"
     [paginationSizes]="[2, 4, 6]"
     [defaultPageSize]="4"
     (sort)="sortData($event)"
-    [rowActionIcon]="''"
-    (rowAction)="removeOrder($event)"
+    [rowActionIcon]="'send'"
+    (rowAction)="sendMoney($event)"
   >
   </app-custom-table>
 </div>

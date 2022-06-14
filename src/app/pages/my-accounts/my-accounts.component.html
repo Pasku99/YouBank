@@ -2,25 +2,19 @@
   <h2>Mis cuentas</h2>
 </div>
 <div class="row ml-auto mr-auto text-center">
-  <div class="col-xl-3 col-md-4 col-sm-6 col-12 mt-4">
-    <mat-card class="card" [routerLink]="['/transactions']"
-      ><mat-card-title>CUENTA 1</mat-card-title
-      ><mat-card-subtitle>1234 5678 9012 3456</mat-card-subtitle
-      ><mat-card-content>1748€</mat-card-content></mat-card
-    >
-  </div>
-  <div class="col-xl-3 col-md-4 col-sm-6 col-12 mt-4">
-    <mat-card class="card" [routerLink]="['/transactions']"
-      ><mat-card-title>CUENTA 2</mat-card-title
-      ><mat-card-subtitle>1234 5678 9012 3456</mat-card-subtitle
-      ><mat-card-content>2550€</mat-card-content></mat-card
-    >
-  </div>
-  <div class="col-xl-3 col-md-4 col-sm-6 col-12 mt-4">
-    <mat-card class="card" [routerLink]="['/transactions']"
-      ><mat-card-title>CUENTA 3</mat-card-title
-      ><mat-card-subtitle>1234 5678 9012 3456</mat-card-subtitle
-      ><mat-card-content>4000€</mat-card-content></mat-card
+  <div
+    class="col-xl-3 col-md-4 col-sm-6 col-12 mt-4"
+    *ngFor="let account of accounts; let i = index"
+  >
+    <mat-card class="card" (click)="pickAccount(account)"
+      ><mat-card-title
+        >CUENTA {{ i }}
+        <fa-icon
+          [icon]="faStar"
+          *ngIf="account?.isMain"
+        ></fa-icon> </mat-card-title
+      ><mat-card-subtitle>{{ account.number }}</mat-card-subtitle
+      ><mat-card-content>{{ account.total }}</mat-card-content></mat-card
     >
   </div>
 </div>

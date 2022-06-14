@@ -17,12 +17,19 @@ export class ToolbarComponent implements OnInit {
       showOnTablet: false,
       showOnDesktop: true
     },
-
+    {
+      label: 'Mis contactos',
+      icon: 'perm_contact_calendar',
+      link: '/contacts',
+      showOnMobile: false,
+      showOnTablet: true,
+      showOnDesktop: true
+    },
     {
       label: 'Cerrar Sesión',
       icon: 'logout',
       link: '/login',
-      showOnMobile: true,
+      showOnMobile: false,
       showOnTablet: true,
       showOnDesktop: true
     }

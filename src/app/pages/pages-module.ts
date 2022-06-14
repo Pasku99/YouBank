@@ -12,6 +12,7 @@ import { TableComponent } from './components/table/table.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { MyAccountsComponent } from './my-accounts/my-accounts.component';
 import { TransactionsComponent } from './my-accounts/transactions/transactions.component';
+import { MyContactsComponent } from './my-contacts/my-contacts.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { TransactionsComponent } from './my-accounts/transactions/transactions.c
     PagesLayoutComponent,
     MyAccountsComponent,
     TransactionsComponent,
+    MyContactsComponent,
     DataPropertyGetterPipe,
     TableComponent
   ],
@@ -28,6 +30,7 @@ import { TransactionsComponent } from './my-accounts/transactions/transactions.c
     DataPropertyGetterPipe,
     MyAccountsComponent,
     TransactionsComponent,
+    MyContactsComponent,
     TableComponent
   ],
   imports: [

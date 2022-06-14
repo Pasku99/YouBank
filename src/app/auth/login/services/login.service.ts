@@ -10,7 +10,7 @@ const base_url = environment.base_url;
 const version = environment.version;
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LoginService {
   user: User = {} as User;
@@ -22,12 +22,21 @@ export class LoginService {
       tap((res: any) => {
         localStorage.setItem('x-token', res.user?.token);
         this.user = res;
-      })
+      }),
     );
   }
 
   isAuthenticated(): Observable<any> {
     return this.http.get(`${base_url}/login/token`, this.headers);
+  }
+
+  getUsers(): Observable<any> {
+    return this.http.get(`${base_url}/users`, this.headers);
+  }
+
+  checkPassword(user: UserLogin): Observable<any> {
+    console.log(user);
+    return this.http.post(`${base_url}/login/password`, user, this.headers);
   }
 
   validate(correct: boolean, incorrect: boolean): Observable<boolean> {
@@ -47,7 +56,7 @@ export class LoginService {
       catchError(() => {
         localStorage.removeItem('x-token');
         return of(incorrect);
-      })
+      }),
     );
   }
 
@@ -67,8 +76,8 @@ export class LoginService {
   get headers(): any {
     return {
       headers: {
-        'x-token': localStorage.getItem('x-token') || ''
-      }
+        'x-token': localStorage.getItem('x-token') || '',
+      },
     };
   }
 

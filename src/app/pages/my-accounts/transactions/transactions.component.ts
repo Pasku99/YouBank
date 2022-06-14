@@ -1,53 +1,60 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { firstValueFrom, take } from 'rxjs';
+import { LoginService } from 'src/app/auth/login/services/login.service';
 import { TableColumn } from '../../components/table/models/table.model';
+import { Transaction } from './models/transaction.model';
+import { TransactionService } from './services/transaction.service';
 
 @Component({
   selector: 'app-transactions',
   templateUrl: './transactions.component.html',
-  styleUrls: ['./transactions.component.scss']
+  styleUrls: ['./transactions.component.scss'],
 })
 export class TransactionsComponent implements OnInit {
-  orders = [
-    {
-      account: 'Compra a Burguer King',
-      amount: '-10.25€',
-      total: '4142.85€',
-      date: '04/04/2022'
-    },
-    {
-      account: 'Nómina UA marzo',
-      amount: '+2300.87€',
-      total: '4153.1€',
-      date: '04/04/2022'
-    },
-    {
-      account: 'Compra Amazon',
-      amount: '-65.57€',
-      total: '1852.23€',
-      date: '04/04/2022'
-    },
-    {
-      account: 'Compra Repsol',
-      amount: '-82.20€',
-      total: '1917.8€',
-      date: '04/04/2022'
-    }
-  ];
+  transactions: Transaction[] = [];
   ordersTableColumns: TableColumn[] = [
-    { name: 'Motivo', dataKey: 'account', position: 'right', isSortable: true },
+    { name: 'Motivo', dataKey: 'reason', position: 'right', isSortable: true },
     {
       name: 'Cantidad',
       dataKey: 'amount',
       position: 'right',
-      isSortable: true
+      isSortable: true,
     },
     { name: 'Fecha', dataKey: 'date', position: 'right', isSortable: true },
-    { name: 'Total', dataKey: 'total', position: 'right', isSortable: true }
+    {
+      name: 'Número de cuenta',
+      dataKey: 'name',
+      position: 'right',
+      isSortable: true,
+    },
   ];
+  total: number = 0;
 
-  constructor() {}
+  constructor(
+    protected readonly route: ActivatedRoute,
+    protected readonly router: Router,
+    protected readonly transactionService: TransactionService,
+    protected readonly loginService: LoginService,
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.route.queryParams.pipe(take(1)).subscribe((params) => {
+      this.getTransactions(params['id']);
+      this.total = params['total'];
+    });
+  }
+
+  async getTransactions(accountId: string): Promise<void> {
+    this.transactions = (
+      await firstValueFrom(
+        this.transactionService.getTransactions(
+          this.loginService.user.id ?? '',
+          accountId,
+        ),
+      )
+    ).transactions;
+  }
 
   sortData(event: any): void {
     console.log(event);
